@@ -48,7 +48,8 @@ The call from a root file would be;
 
     var engine = require('mengine')('ejs', './config/template/ejs');
 
-If there is no configuration file mengine will search for a renderFile and render method and add them to the object.
+If there is no configuration file mengine will search for a configfile for the template engine.
+If there isn't one the engine object, a renderFile and render method are added to the object if they are found.
 There is no error when the methods aren't found.
 
 ## Tests
