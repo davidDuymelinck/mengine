@@ -94,6 +94,20 @@ describe('Mengine' , function(){
 		var data = { out: "Hello world" };
 
 		it('should output Hello world', function(done){
+			var engine = mengine('jade');
+
+			engine.render('= out', data).should.equal(data.out);
+
+			engine.renderFile('./test/templates/hello_world.jade', data, function(err, html){
+				if(err){ return done(err); }
+
+				html.should.equal(data.out);
+
+				done();
+			});
+		});
+
+		it('should output Hello world with lib config', function(done){
 			var engine = mengine('ejs');
 
 			engine.render('{{= out }}', data).should.equal(data.out);
