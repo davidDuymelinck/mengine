@@ -1,0 +1,30 @@
+{
+  "name": "mengine",
+  "version": "0.0.1",
+  "description": "Use multiple template engines with ease",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidDuymelinck/mengine"
+  },
+  "keywords": [
+    "node",
+    "template",
+    "engine"
+  ],
+  "author": "David Duymelinck",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/davidDuymelinck/mengine/issues"
+  },
+  "homepage": "https://github.com/davidDuymelinck/mengine",
+  "devDependencies": {
+    "should": "^4.1.0",
+    "mocha": "^2.0.1",
+    "ejs": "^1.0.0",
+    "nunjucks": "^1.1.0"
+  }
+}
