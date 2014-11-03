@@ -1,11 +1,15 @@
 var nunjucks = require('nunjucks');
 
-module.exports = function(mengine){
+module.exports = function nunjucksConfig(){
 	nunjucks.configure({ autoescape: true });
 
-	mengine.renderFile = nunjucks.render;
+	var out = {};
 
-	mengine.render = nunjucks.renderString;
+	out.engine = nunjucks;
 
-	return mengine;
+	out.renderFile = nunjucks.render;
+
+	out.render = nunjucks.renderString;
+
+	return out;
 };
