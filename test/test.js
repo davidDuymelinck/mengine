@@ -90,9 +90,9 @@ describe('Mengine' , function(){
 		});
 	});
 
-	describe('Render', function(){
-		var data = { out: "Hello world" };
+	var data = { out: "Hello world" };
 
+	describe('Render', function(){
 		it('should output Hello world', function(done){
 			var engine = mengine('jade');
 
@@ -127,6 +127,34 @@ describe('Mengine' , function(){
 			engine.render('<%= out %>', data).should.equal(data.out);
 
 			engine.renderFile('./test/templates/hello_world_custom.ejs', data, function(err, html){
+				if(err){ return done(err); }
+
+				html.should.equal(data.out);
+
+				done();
+			});
+		});
+	});
+
+	describe('Lib template configs', function(){
+		it('atpl should output Hello world', function(done){
+			var engine = mengine('atpl');
+
+			engine.renderFile('./test/templates/hello_world.atpl', data, function(err, html){
+				if(err){ return done(err); }
+
+				html.should.equal(data.out);
+
+				done();
+			});
+		});
+
+		it('nunjucks should output Hello world', function(done){
+			var engine = mengine('nunjucks');
+
+			engine.render('{{ out }}', data).should.equal(data.out);
+
+			engine.renderFile('./test/templates/hello_world.nunjucks', data, function(err, html){
 				if(err){ return done(err); }
 
 				html.should.equal(data.out);
