@@ -2,7 +2,7 @@ var should = require('should');
 var mengine = require('../');
 
 describe('Mengine' , function(){
-	var nunjucksConfig = '../test/config/nunjucks.js';
+	var ejsConfig = '../test/config/ejs.js';
 
 	describe('Init', function(){
 		it('should return object', function(){
@@ -14,7 +14,7 @@ describe('Mengine' , function(){
 		});
 
 		it('should return object with custom config', function(){
-			mengine('nunjucks', nunjucksConfig).should.be.type('object');
+			mengine('ejs', ejsConfig).should.be.type('object');
 		});
 
 		it('should have an engine object', function(){
@@ -34,7 +34,7 @@ describe('Mengine' , function(){
 		});
 
 		it('should have an engine object with custom config', function(){
-			var engine = mengine('nunjucks', nunjucksConfig);
+			var engine = mengine('ejs', ejsConfig);
 
 			engine.should.have.property('engine');
 
@@ -58,7 +58,7 @@ describe('Mengine' , function(){
 		});
 
 		it('should have an renderFile method with custom config', function(){
-			var engine = mengine('nunjucks', nunjucksConfig);
+			var engine = mengine('ejs', ejsConfig);
 
 			engine.should.have.property('renderFile');
 
@@ -82,7 +82,7 @@ describe('Mengine' , function(){
 		});
 
 		it('should have a render method with custom config', function(){
-			var engine = mengine('nunjucks', nunjucksConfig);
+			var engine = mengine('ejs', ejsConfig);
 
 			engine.should.have.property('render');
 
@@ -122,11 +122,11 @@ describe('Mengine' , function(){
 		});
 
 		it('should output Hello world with custom config', function(done){
-			var engine = mengine('nunjucks', nunjucksConfig);
+			var engine = mengine('ejs', ejsConfig);
 
-			engine.render('{{ out }}', data).should.equal(data.out);
+			engine.render('<%= out %>', data).should.equal(data.out);
 
-			engine.renderFile('./test/templates/hello_world.nunjucks', data, function(err, html){
+			engine.renderFile('./test/templates/hello_world_custom.ejs', data, function(err, html){
 				if(err){ return done(err); }
 
 				html.should.equal(data.out);
