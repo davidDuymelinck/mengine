@@ -149,6 +149,32 @@ describe('Mengine' , function(){
 			});
 		});
 
+		it('eco should output Hello world', function(done){
+			var engine = mengine('eco');
+			
+			engine.render('<%= @out %>', data).should.equal(data.out);
+
+			engine.renderFile('./test/templates/hello_world.eco', data, function(err, html){
+				if(err){ return done(err); }
+
+				html.should.equal(data.out);
+
+				done();
+			});
+		});
+
+		it('ect should output Hello world', function(done){
+			var engine = mengine('ect');
+
+			engine.renderFile('./test/templates/hello_world.ect', data, function(err, html){
+				if(err){ return done(err); }
+
+				html.should.equal(data.out);
+
+				done();
+			});
+		});
+
 		it('nunjucks should output Hello world', function(done){
 			var engine = mengine('nunjucks');
 

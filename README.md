@@ -13,7 +13,7 @@ Why isn't it possible to use the template engine directly?
 
 Why are all the methods in one file?
 
-The answer to these questions let me to create a new package.
+The answer to these questions lead me to create a new package.
 
 ## Usage
 
@@ -51,6 +51,8 @@ The call from a root file would be;
 If there is no configuration file mengine will search for a configfile for the template engine.
 If there isn't one the engine object, a renderFile and render method are added to the object if they are found.
 There is no error when the methods aren't found.
+
+If the template language allows the change of the open and close strings, the package configuration will set them to {{ and }} respectively.
 
 ## Tests
 
