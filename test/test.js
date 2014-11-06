@@ -151,7 +151,7 @@ describe('Mengine' , function(){
 
 		it('eco should output Hello world', function(done){
 			var engine = mengine('eco');
-			
+
 			engine.render('<%= @out %>', data).should.equal(data.out);
 
 			engine.renderFile('./test/templates/hello_world.eco', data, function(err, html){
@@ -167,6 +167,58 @@ describe('Mengine' , function(){
 			var engine = mengine('ect');
 
 			engine.renderFile('./test/templates/hello_world.ect', data, function(err, html){
+				if(err){ return done(err); }
+
+				html.should.equal(data.out);
+
+				done();
+			});
+		});
+
+		it('handlebars should output Hello world', function(done){
+			var engine = mengine('handlebars');
+			// Needed to add character because the engine didn't allow a variable only string
+			engine.render('{{ out }} ', data).should.equal(data.out+' ');
+
+			engine.renderFile('./test/templates/hello_world.handlebars', data, function(err, html){
+				if(err){ return done(err); }
+
+				html.should.equal(data.out+'\n');
+
+				done();
+			});
+		});
+
+		it('hogan should output Hello world', function(done){
+			var engine = mengine('hogan');
+
+			engine.render('{{ out }}', data).should.equal(data.out);
+
+			engine.renderFile('./test/templates/hello_world.hogan', data, function(err, html){
+				if(err){ return done(err); }
+
+				html.should.equal(data.out);
+
+				done();
+			});
+		});
+
+		it('jazz should output Hello world', function(done){
+			var engine = mengine('jazz');
+
+			engine.renderFile('./test/templates/hello_world.jazz', data, function(err, html){
+				if(err){ return done(err); }
+
+				html.should.equal(data.out);
+
+				done();
+			});
+		});
+
+		it('just should output Hello world', function(done){
+			var engine = mengine('just');
+
+			engine.renderFile('./test/templates/hello_world.just', data, function(err, html){
 				if(err){ return done(err); }
 
 				html.should.equal(data.out);

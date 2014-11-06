@@ -25,6 +25,13 @@ The `engine` variable exposes:
 - renderFile: renders a file based template
 - render: renders a string based template
 
+Template engines that have a renderFile and render method:
+
+- haml
+- jade
+
+
+
 Mengine has a second parameter which allows you to add or overwrite the template engine configuration.
 
 config/template_engine/ejs.js
