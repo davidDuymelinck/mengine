@@ -40,6 +40,10 @@
     "ractive": "^0.6.1",
     "should": "^4.1.0",
     "swig": "^1.4.2",
-    "templayed": "^0.2.3"
+    "templayed": "^0.2.3",
+    "toffee": "^0.1.12",
+    "underscore": "^1.7.0",
+    "walrus": "^0.10.1",
+    "whiskers": "^0.3.3"
   }
 }

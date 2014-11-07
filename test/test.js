@@ -218,7 +218,7 @@ describe('Mengine' , function(){
 		it('just should output Hello world', function(done){
 			var engine = mengine('just');
 
-			engine.renderFile('./test/templates/hello_world.just', data, function(err, html){
+			engine.renderFile('./test/templates/hello_world.ejs', data, function(err, html){
 				if(err){ return done(err); }
 
 				html.should.equal(data.out);
@@ -286,7 +286,7 @@ describe('Mengine' , function(){
 		it('qejs should output Hello world', function(done){
 			var engine = mengine('qejs');
 
-			engine.renderFile('./test/templates/hello_world.qejs', data, function(err, html){
+			engine.renderFile('./test/templates/hello_world.ejs', data, function(err, html){
 				if(err){ return done(err); }
 
 				html.should.equal(data.out);
@@ -329,6 +329,62 @@ describe('Mengine' , function(){
 			engine.render('{{ out }}', data).should.equal(data.out);
 
 			engine.renderFile('./test/templates/hello_world.mustache', data, function(err, html){
+				if(err){ return done(err); }
+
+				html.should.equal(data.out);
+
+				done();
+			});
+		});
+
+		it('toffee should output Hello world', function(done){
+			var engine = mengine('toffee');
+
+			engine.render('#{out}', data).should.equal(data.out);
+
+			engine.renderFile('./test/templates/hello_world.liquor', data, function(err, html){
+				if(err){ return done(err); }
+
+				html.should.equal(data.out);
+
+				done();
+			});
+		});
+
+		it('underscore should output Hello world', function(done){
+			var engine = mengine('underscore');
+
+			engine.render('{{ out }}', data).should.equal(data.out);
+
+			engine.renderFile('./test/templates/hello_world.mustache', data, function(err, html){
+				if(err){ return done(err); }
+
+				html.should.equal(data.out);
+
+				done();
+			});
+		});
+
+		it('walrus should output Hello world', function(done){
+			var engine = mengine('walrus');
+
+			engine.render('{{ out }}', data).should.equal(data.out);
+
+			engine.renderFile('./test/templates/hello_world.mustache', data, function(err, html){
+				if(err){ return done(err); }
+
+				html.should.equal(data.out);
+
+				done();
+			});
+		});
+
+		it('whiskers should output Hello world', function(done){
+			var engine = mengine('whiskers');
+
+			engine.render('{out}', data).should.equal(data.out);
+
+			engine.renderFile('./test/templates/hello_world.dust', data, function(err, html){
 				if(err){ return done(err); }
 
 				html.should.equal(data.out);
