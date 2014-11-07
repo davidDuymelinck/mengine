@@ -140,7 +140,7 @@ describe('Mengine' , function(){
 		it('atpl should output Hello world', function(done){
 			var engine = mengine('atpl');
 
-			engine.renderFile('./test/templates/hello_world.atpl', data, function(err, html){
+			engine.renderFile('./test/templates/hello_world.mustache', data, function(err, html){
 				if(err){ return done(err); }
 
 				html.should.equal(data.out);
@@ -183,7 +183,7 @@ describe('Mengine' , function(){
 			engine.renderFile('./test/templates/hello_world.handlebars', data, function(err, html){
 				if(err){ return done(err); }
 
-				html.should.equal(data.out+'\n');
+				html.should.equal(data.out+'|');
 
 				done();
 			});
@@ -194,7 +194,7 @@ describe('Mengine' , function(){
 
 			engine.render('{{ out }}', data).should.equal(data.out);
 
-			engine.renderFile('./test/templates/hello_world.hogan', data, function(err, html){
+			engine.renderFile('./test/templates/hello_world.mustache', data, function(err, html){
 				if(err){ return done(err); }
 
 				html.should.equal(data.out);
@@ -227,12 +227,108 @@ describe('Mengine' , function(){
 			});
 		});
 
+		it('liquor should output Hello world', function(done){
+			var engine = mengine('liquor');
+
+			engine.render('#{out}', data).should.equal(data.out);
+
+			engine.renderFile('./test/templates/hello_world.liquor', data, function(err, html){
+				if(err){ return done(err); }
+
+				html.should.equal(data.out);
+
+				done();
+			});
+		});
+
+		it('lodash should output Hello world', function(done){
+			var engine = mengine('lodash');
+
+			engine.render('{{ out }}', data).should.equal(data.out);
+
+			engine.renderFile('./test/templates/hello_world.mustache', data, function(err, html){
+				if(err){ return done(err); }
+
+				html.should.equal(data.out);
+
+				done();
+			});
+		});
+
+		it('mustache should output Hello world', function(done){
+			var engine = mengine('mustache');
+
+			engine.render('{{ out }}', data).should.equal(data.out);
+
+			engine.renderFile('./test/templates/hello_world.mustache', data, function(err, html){
+				if(err){ return done(err); }
+
+				html.should.equal(data.out);
+
+				done();
+			});
+		});
+
 		it('nunjucks should output Hello world', function(done){
 			var engine = mengine('nunjucks');
 
 			engine.render('{{ out }}', data).should.equal(data.out);
 
-			engine.renderFile('./test/templates/hello_world.nunjucks', data, function(err, html){
+			engine.renderFile('./test/templates/hello_world.mustache', data, function(err, html){
+				if(err){ return done(err); }
+
+				html.should.equal(data.out);
+
+				done();
+			});
+		});
+
+		it('qejs should output Hello world', function(done){
+			var engine = mengine('qejs');
+
+			engine.renderFile('./test/templates/hello_world.qejs', data, function(err, html){
+				if(err){ return done(err); }
+
+				html.should.equal(data.out);
+
+				done();
+			});
+		});
+
+		it('ractive should output Hello world', function(done){
+			var engine = mengine('ractive');
+
+			engine.render('{{ out }}', data).should.equal(data.out);
+
+			engine.renderFile('./test/templates/hello_world.mustache', data, function(err, html){
+				if(err){ return done(err); }
+
+				html.should.equal(data.out);
+
+				done();
+			});
+		});
+
+		it('swig should output Hello world', function(done){
+			var engine = mengine('swig');
+
+			engine.render('{{ out }}', data).should.equal(data.out);
+
+			engine.renderFile('./test/templates/hello_world.mustache', data, function(err, html){
+				if(err){ return done(err); }
+
+				html.should.equal(data.out);
+
+				done();
+			});
+		});
+
+		it('templayed should output Hello world', function(done){
+			var engine = mengine('templayed');
+
+			engine.render('{{ out }}', data).should.equal(data.out);
+
+			engine.renderFile('./test/templates/hello_world.mustache', data, function(err, html){
 				if(err){ return done(err); }
 
 				html.should.equal(data.out);
