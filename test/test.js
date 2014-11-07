@@ -1,5 +1,6 @@
 var should = require('should');
 var mengine = require('../');
+var Plan = require('../lib/util').Plan;
 
 describe('Mengine' , function(){
 	var ejsConfig = '../test/config/ejs.js';
@@ -25,14 +26,6 @@ describe('Mengine' , function(){
 			engine.engine.should.be.type('object');
 		});
 
-		it('should have an engine object with lib config', function(){
-			var engine = mengine('ejs');
-
-			engine.should.have.property('engine');
-
-			engine.engine.should.be.type('object');
-		});
-
 		it('should have an engine object with custom config', function(){
 			var engine = mengine('ejs', ejsConfig);
 
@@ -49,14 +42,6 @@ describe('Mengine' , function(){
 			engine.renderFile.should.be.type('function');
 		});
 
-		it('should have an renderFile method with lib config', function(){
-			var engine = mengine('ejs');
-
-			engine.should.have.property('renderFile');
-
-			engine.renderFile.should.be.type('function');
-		});
-
 		it('should have an renderFile method with custom config', function(){
 			var engine = mengine('ejs', ejsConfig);
 
@@ -67,14 +52,6 @@ describe('Mengine' , function(){
 
 		it('should have a render method', function(){
 			var engine = mengine('jade');
-
-			engine.should.have.property('render');
-
-			engine.render.should.be.type('function');
-		});
-
-		it('should have a render method with lib config', function(){
-			var engine = mengine('ejs');
 
 			engine.should.have.property('render');
 
@@ -107,20 +84,6 @@ describe('Mengine' , function(){
 			});
 		});
 
-		it('should output Hello world with lib config', function(done){
-			var engine = mengine('ejs');
-
-			engine.render('{{= out }}', data).should.equal(data.out);
-
-			engine.renderFile('./test/templates/hello_world.ejs', data, function(err, html){
-				if(err){ return done(err); }
-
-				html.should.equal(data.out);
-
-				done();
-			});
-		});
-
 		it('should output Hello world with custom config', function(done){
 			var engine = mengine('ejs', ejsConfig);
 
@@ -140,6 +103,8 @@ describe('Mengine' , function(){
 		it('atpl should output Hello world', function(done){
 			var engine = mengine('atpl');
 
+			engine.renderFileSync('./test/templates/hello_world.mustache', data).should.equal(data.out);
+
 			engine.renderFile('./test/templates/hello_world.mustache', data, function(err, html){
 				if(err){ return done(err); }
 
@@ -151,20 +116,33 @@ describe('Mengine' , function(){
 
 		it('eco should output Hello world', function(done){
 			var engine = mengine('eco');
+			var plan = new Plan(2, done);
 
-			engine.render('<%= @out %>', data).should.equal(data.out);
+			engine.renderStringSync('<%= @out %>', data).should.equal(data.out);
 
-			engine.renderFile('./test/templates/hello_world.eco', data, function(err, html){
-				if(err){ return done(err); }
+			engine.renderString('<%= @out %>', data, function(err, html){
+				if(err){ return plan.ok(true); }
 
 				html.should.equal(data.out);
 
-				done();
+				plan.ok(true);
+			});
+
+			engine.renderFileSync('./test/templates/hello_world.eco', data).should.equal(data.out);
+
+			engine.renderFile('./test/templates/hello_world.eco', data, function(err, html){
+				if(err){ return plan.ok(true); }
+
+				html.should.equal(data.out);
+
+				plan.ok(true);
 			});
 		});
 
 		it('ect should output Hello world', function(done){
 			var engine = mengine('ect');
+
+			engine.renderFileSync('./test/templates/hello_world.ect', data).should.equal(data.out);
 
 			engine.renderFile('./test/templates/hello_world.ect', data, function(err, html){
 				if(err){ return done(err); }
@@ -175,17 +153,53 @@ describe('Mengine' , function(){
 			});
 		});
 
+		it('ejs should output Hello world', function(done){
+			var engine = mengine('ejs');
+			var plan = new Plan(2, done);
+
+			engine.renderStringSync('{{= out }}', data).should.equal(data.out);
+
+			engine.renderString('{{= out }}', data, function(err, html){
+				if(err){ return plan.ok(true); }
+
+				html.should.equal(data.out);
+
+				plan.ok(true);
+			});
+
+			engine.renderFileSync('./test/templates/hello_world.ejs', data).should.equal(data.out);
+
+			engine.renderFile('./test/templates/hello_world.ejs', data, function(err, html){
+				if(err){ return plan.ok(true); }
+
+				html.should.equal(data.out);
+
+				plan.ok(true);
+			});
+		});
+
 		it('handlebars should output Hello world', function(done){
 			var engine = mengine('handlebars');
+			var plan = new Plan(2, done);
 			// Needed to add character because the engine didn't allow a variable only string
-			engine.render('{{ out }} ', data).should.equal(data.out+' ');
+			engine.renderStringSync('{{ out }} ', data).should.equal(data.out+' ');
+
+			engine.renderString('{{ out }} ', data, function(err, html){
+				if(err){ return plan.ok(true); }
+
+				html.should.equal(data.out+' ');
+
+				plan.ok(true);
+			});
+
+			engine.renderFileSync('./test/templates/hello_world.handlebars', data).should.equal(data.out+'|');
 
 			engine.renderFile('./test/templates/hello_world.handlebars', data, function(err, html){
-				if(err){ return done(err); }
+				if(err){ return plan.ok(true); }
 
 				html.should.equal(data.out+'|');
 
-				done();
+				plan.ok(true);
 			});
 		});
 
