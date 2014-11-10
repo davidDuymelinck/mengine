@@ -45,6 +45,7 @@
     "toffee": "^0.1.12",
     "underscore": "^1.7.0",
     "walrus": "^0.10.1",
-    "whiskers": "^0.3.3"
+    "whiskers": "^0.3.3",
+    "hamljs": "^0.6.2"
   }
 }
