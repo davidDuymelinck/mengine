@@ -1,6 +1,7 @@
 var should = require('should');
 var mengine = require('../');
 var Plan = require('../lib/util').Plan;
+var fs = require('fs');
 
 describe('Mengine' , function(){
 	var ejsConfig = '../test/config/ejs.js';
@@ -433,5 +434,14 @@ describe('Mengine' , function(){
 				plan.ok(true);
 			});
 		});
+	});
+
+	describe('Partials/inheritance', function(){
+		it('atpl should have extended layout and included include template', function(){
+			var data = { title: 'Hello world'};
+			var engine = mengine('atpl');
+
+			engine.renderFileSync('./test/templates/partials/atpl/index.mustache', data).should.containEql(data.title);
+		})
 	});
 });
