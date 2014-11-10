@@ -6,10 +6,6 @@ describe('Mengine' , function(){
 	var ejsConfig = '../test/config/ejs.js';
 
 	describe('Init', function(){
-		it('should return object', function(){
-			mengine('jade').should.be.type('object');
-		});
-
 		it('should return object with lib config', function(){
 			mengine('ejs').should.be.type('object');
 		});
@@ -18,8 +14,8 @@ describe('Mengine' , function(){
 			mengine('ejs', ejsConfig).should.be.type('object');
 		});
 
-		it('should have an engine object', function(){
-			var engine = mengine('jade');
+		it('should have an engine object with lib config', function(){
+			var engine = mengine('ejs');
 
 			engine.should.have.property('engine');
 
@@ -33,73 +29,35 @@ describe('Mengine' , function(){
 
 			engine.engine.should.be.type('object');
 		});
-
-		it('should have an renderFile method', function(){
-			var engine = mengine('jade');
-
-			engine.should.have.property('renderFile');
-
-			engine.renderFile.should.be.type('function');
-		});
-
-		it('should have an renderFile method with custom config', function(){
-			var engine = mengine('ejs', ejsConfig);
-
-			engine.should.have.property('renderFile');
-
-			engine.renderFile.should.be.type('function');
-		});
-
-		it('should have a render method', function(){
-			var engine = mengine('jade');
-
-			engine.should.have.property('render');
-
-			engine.render.should.be.type('function');
-		});
-
-		it('should have a render method with custom config', function(){
-			var engine = mengine('ejs', ejsConfig);
-
-			engine.should.have.property('render');
-
-			engine.render.should.be.type('function');
-		});
-	});
-
-	var data = { out: "Hello world" };
-
-	describe('Render', function(){
-		it('should output Hello world', function(done){
-			var engine = mengine('jade');
-
-			engine.render('= out', data).should.equal(data.out);
-
-			engine.renderFile('./test/templates/hello_world.jade', data, function(err, html){
-				if(err){ return done(err); }
-
-				html.should.equal(data.out);
-
-				done();
-			});
-		});
-
-		it('should output Hello world with custom config', function(done){
-			var engine = mengine('ejs', ejsConfig);
-
-			engine.render('<%= out %>', data).should.equal(data.out);
-
-			engine.renderFile('./test/templates/hello_world_custom.ejs', data, function(err, html){
-				if(err){ return done(err); }
-
-				html.should.equal(data.out);
-
-				done();
-			});
-		});
 	});
 
 	describe('Lib template configs', function(){
+		var data = { out: "Hello world" };
+		var fullApiMustache = function(engineName, done){
+			var engine = mengine(engineName);
+			var plan = new Plan(2, done);
+
+			engine.renderStringSync('{{ out }}', data).should.equal(data.out);
+
+			engine.renderString('{{ out }}', data, function(err, html){
+				if(err){ return plan.ok(true); }
+
+				html.should.equal(data.out);
+
+				plan.ok(true);
+			});
+
+			engine.renderFileSync('./test/templates/hello_world.mustache', data).should.equal(data.out);
+
+			engine.renderFile('./test/templates/hello_world.mustache', data, function(err, html){
+				if(err){ return plan.ok(true); }
+
+				html.should.equal(data.out);
+
+				plan.ok(true);
+			});
+		};
+
 		it('atpl should output Hello world', function(done){
 			var engine = mengine('atpl');
 
@@ -204,28 +162,7 @@ describe('Mengine' , function(){
 		});
 
 		it('hogan should output Hello world', function(done){
-			var engine = mengine('hogan');
-			var plan = new Plan(2, done);
-
-			engine.renderStringSync('{{ out }}', data).should.equal(data.out);
-
-			engine.renderString('{{ out }}', data, function(err, html){
-				if(err){ return plan.ok(true); }
-
-				html.should.equal(data.out);
-
-				plan.ok(true);
-			});
-
-			engine.renderFileSync('./test/templates/hello_world.mustache', data).should.equal(data.out);
-
-			engine.renderFile('./test/templates/hello_world.mustache', data, function(err, html){
-				if(err){ return plan.ok(true); }
-
-				html.should.equal(data.out);
-
-				plan.ok(true);
-			});
+			fullApiMustache('hogan', done);
 		});
 
 		it('jazz should output Hello world', function(done){
@@ -296,187 +233,105 @@ describe('Mengine' , function(){
 		});
 
 		it('lodash should output Hello world', function(done){
-			var engine = mengine('lodash');
-			var plan = new Plan(2, done);
-
-			engine.renderStringSync('{{ out }}', data).should.equal(data.out);
-
-			engine.renderString('{{ out }}', data, function(err, html){
-				if(err){ return plan.ok(true); }
-
-				html.should.equal(data.out);
-
-				plan.ok(true);
-			});
-
-			engine.renderFileSync('./test/templates/hello_world.mustache', data).should.equal(data.out);
-
-			engine.renderFile('./test/templates/hello_world.mustache', data, function(err, html){
-				if(err){ return plan.ok(true); }
-
-				html.should.equal(data.out);
-
-				plan.ok(true);
-			});
+			fullApiMustache('lodash', done);
 		});
 
 		it('mustache should output Hello world', function(done){
-			var engine = mengine('mustache');
-			var plan = new Plan(2, done);
-
-			engine.renderStringSync('{{ out }}', data).should.equal(data.out);
-
-			engine.renderString('{{ out }}', data, function(err, html){
-				if(err){ return plan.ok(true); }
-
-				html.should.equal(data.out);
-
-				plan.ok(true);
-			});
-
-			engine.renderFileSync('./test/templates/hello_world.mustache', data).should.equal(data.out);
-
-			engine.renderFile('./test/templates/hello_world.mustache', data, function(err, html){
-				if(err){ return done(err); }
-
-				html.should.equal(data.out);
-
-				done();
-			});
+			fullApiMustache('mustache', done);
 		});
 
 		it('nunjucks should output Hello world', function(done){
-			var engine = mengine('nunjucks');
-			var plan = new Plan(2, done);
-
-			engine.renderStringSync('{{ out }}', data).should.equal(data.out);
-
-			engine.renderString('{{ out }}', data, function(err, html){
-				if(err){ return plan.ok(true); }
-
-				html.should.equal(data.out);
-
-				plan.ok(true);
-			});
-
-			engine.renderFileSync('./test/templates/hello_world.mustache', data).should.equal(data.out);
-
-			engine.renderFile('./test/templates/hello_world.mustache', data, function(err, html){
-				if(err){ return done(err); }
-
-				html.should.equal(data.out);
-
-				done();
-			});
+			fullApiMustache('nunjucks', done);
 		});
 
 		it('qejs should output Hello world', function(done){
 			var engine = mengine('qejs');
+			var plan = new Plan(2, done);
 
-			engine.renderFile('./test/templates/hello_world.ejs', data, function(err, html){
-				if(err){ return done(err); }
+			engine.renderString('{{= out }}', data, function(err, html){
+				if(err){ return plan.ok(true); }
 
 				html.should.equal(data.out);
 
-				done();
+				plan.ok(true);
+			});
+
+			engine.renderFile('./test/templates/hello_world.ejs', data, function(err, html){
+				if(err){ return plan.ok(true); }
+
+				html.should.equal(data.out);
+
+				plan.ok(true);
 			});
 		});
 
 		it('ractive should output Hello world', function(done){
-			var engine = mengine('ractive');
-
-			engine.render('{{ out }}', data).should.equal(data.out);
-
-			engine.renderFile('./test/templates/hello_world.mustache', data, function(err, html){
-				if(err){ return done(err); }
-
-				html.should.equal(data.out);
-
-				done();
-			});
+			fullApiMustache('ractive', done);
 		});
 
 		it('swig should output Hello world', function(done){
-			var engine = mengine('swig');
-
-			engine.render('{{ out }}', data).should.equal(data.out);
-
-			engine.renderFile('./test/templates/hello_world.mustache', data, function(err, html){
-				if(err){ return done(err); }
-
-				html.should.equal(data.out);
-
-				done();
-			});
+			fullApiMustache('swig', done);
 		});
 
 		it('templayed should output Hello world', function(done){
-			var engine = mengine('templayed');
-
-			engine.render('{{ out }}', data).should.equal(data.out);
-
-			engine.renderFile('./test/templates/hello_world.mustache', data, function(err, html){
-				if(err){ return done(err); }
-
-				html.should.equal(data.out);
-
-				done();
-			});
+			fullApiMustache('templayed', done);
 		});
 
 		it('toffee should output Hello world', function(done){
 			var engine = mengine('toffee');
+			var plan = new Plan(2, done);
 
-			engine.render('#{out}', data).should.equal(data.out);
+			engine.renderStringSync('#{out}', data).should.equal(data.out);
 
-			engine.renderFile('./test/templates/hello_world.liquor', data, function(err, html){
-				if(err){ return done(err); }
+			engine.renderString('#{out}', data, function(err, html){
+				if(err){ return plan.ok(true); }
 
 				html.should.equal(data.out);
 
-				done();
+				plan.ok(true);
+			});
+
+			engine.renderFileSync('./test/templates/hello_world.liquor', data).should.equal(data.out);
+
+			engine.renderFile('./test/templates/hello_world.liquor', data, function(err, html){
+				if(err){ return plan.ok(true); }
+
+				html.should.equal(data.out);
+
+				plan.ok(true);
 			});
 		});
 
 		it('underscore should output Hello world', function(done){
-			var engine = mengine('underscore');
-
-			engine.render('{{ out }}', data).should.equal(data.out);
-
-			engine.renderFile('./test/templates/hello_world.mustache', data, function(err, html){
-				if(err){ return done(err); }
-
-				html.should.equal(data.out);
-
-				done();
-			});
+			fullApiMustache('underscore', done);
 		});
 
 		it('walrus should output Hello world', function(done){
-			var engine = mengine('walrus');
-
-			engine.render('{{ out }}', data).should.equal(data.out);
-
-			engine.renderFile('./test/templates/hello_world.mustache', data, function(err, html){
-				if(err){ return done(err); }
-
-				html.should.equal(data.out);
-
-				done();
-			});
+			fullApiMustache('walrus', done);
 		});
 
 		it('whiskers should output Hello world', function(done){
 			var engine = mengine('whiskers');
+			var plan = new Plan(2, done);
 
-			engine.render('{out}', data).should.equal(data.out);
+			engine.renderStringSync('{out}', data).should.equal(data.out);
 
-			engine.renderFile('./test/templates/hello_world.dust', data, function(err, html){
-				if(err){ return done(err); }
+			engine.renderString('{out}', data, function(err, html){
+				if(err){ return plan.ok(true); }
 
 				html.should.equal(data.out);
 
-				done();
+				plan.ok(true);
+			});
+
+			engine.renderFileSync('./test/templates/hello_world.dust', data).should.equal(data.out);
+
+			engine.renderFile('./test/templates/hello_world.dust', data, function(err, html){
+				if(err){ return plan.ok(true); }
+
+				html.should.equal(data.out);
+
+				plan.ok(true);
 			});
 		});
 	});
