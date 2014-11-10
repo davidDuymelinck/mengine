@@ -10,7 +10,13 @@ module.exports = function ejsConfig(){
 
 	out.renderFile = ejs.renderFile;
 
-	out.render = ejs.render;
+	out.renderString = function(str, options, fn){
+		try{
+			fn(null, ejs.render(str, options));
+		}catch(er){
+			fn(err);
+		}
+	};
 
 	return out;
 };
