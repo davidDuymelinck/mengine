@@ -27,6 +27,8 @@
     "eco": "^1.1.0-rc-3",
     "ect": "^0.5.9",
     "ejs": "^1.0.0",
+    "haml-coffee": "^1.14.1",
+    "hamljs": "^0.6.2",
     "handlebars": "^2.0.0",
     "hogan": "^1.0.2",
     "jade": "^1.7.0",
@@ -45,7 +47,6 @@
     "toffee": "^0.1.12",
     "underscore": "^1.7.0",
     "walrus": "^0.10.1",
-    "whiskers": "^0.3.3",
-    "hamljs": "^0.6.2"
+    "whiskers": "^0.3.3"
   }
 }
