@@ -48,5 +48,8 @@
     "underscore": "^1.7.0",
     "walrus": "^0.10.1",
     "whiskers": "^0.3.3"
+  },
+  "dependencies": {
+    "lodash": "^2.4.1"
   }
 }

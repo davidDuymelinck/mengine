@@ -4,7 +4,7 @@ var Plan = require('../lib/util').Plan;
 var fs = require('fs');
 
 describe('Mengine' , function(){
-	var ejsConfig = '../test/config/ejs.js';
+	var ejsConfig = __dirname + '/config/ejs.js';
 
 	describe('Init', function(){
 		it('should return object with lib config', function(){
@@ -30,6 +30,7 @@ describe('Mengine' , function(){
 
 			engine.engine.should.be.type('object');
 		});
+
 	});
 
 	describe('Lib template configs', function(){
@@ -48,9 +49,9 @@ describe('Mengine' , function(){
 				plan.ok(true);
 			});
 
-			engine.renderFileSync('./test/templates/hello_world.mustache', data).should.equal(data.out);
+			engine.renderFileSync(__dirname + '/templates/hello_world.mustache', data).should.equal(data.out);
 
-			engine.renderFile('./test/templates/hello_world.mustache', data, function(err, html){
+			engine.renderFile(__dirname + '/templates/hello_world.mustache', data, function(err, html){
 				if(err){ return plan.ok(true); }
 
 				html.should.equal(data.out);
@@ -72,9 +73,9 @@ describe('Mengine' , function(){
 				plan.ok(true);
 			});
 
-			engine.renderFileSync('./test/templates/hello_world.es6', data).should.equal(data.out);
+			engine.renderFileSync(__dirname + '/templates/hello_world.es6', data).should.equal(data.out);
 
-			engine.renderFile('./test/templates/hello_world.es6', data, function(err, html){
+			engine.renderFile(__dirname + '/templates/hello_world.es6', data, function(err, html){
 				if(err){ return plan.ok(true); }
 
 				html.should.equal(data.out);
@@ -86,9 +87,9 @@ describe('Mengine' , function(){
 		it('atpl should output Hello world', function(done){
 			var engine = mengine('atpl');
 
-			engine.renderFileSync('./test/templates/hello_world.mustache', data).should.equal(data.out);
+			engine.renderFileSync(__dirname + '/templates/hello_world.mustache', data).should.equal(data.out);
 
-			engine.renderFile('./test/templates/hello_world.mustache', data, function(err, html){
+			engine.renderFile(__dirname + '/templates/hello_world.mustache', data, function(err, html){
 				if(err){ return done(err); }
 
 				html.should.equal(data.out);
@@ -111,9 +112,9 @@ describe('Mengine' , function(){
 				plan.ok(true);
 			});
 
-			engine.renderFileSync('./test/templates/hello_world.eco', data).should.equal(data.out);
+			engine.renderFileSync(__dirname + '/templates/hello_world.eco', data).should.equal(data.out);
 
-			engine.renderFile('./test/templates/hello_world.eco', data, function(err, html){
+			engine.renderFile(__dirname + '/templates/hello_world.eco', data, function(err, html){
 				if(err){ return plan.ok(true); }
 
 				html.should.equal(data.out);
@@ -125,9 +126,9 @@ describe('Mengine' , function(){
 		it('ect should output Hello world', function(done){
 			var engine = mengine('ect');
 
-			engine.renderFileSync('./test/templates/hello_world.ect', data).should.equal(data.out);
+			engine.renderFileSync(__dirname + '/templates/hello_world.ect', data).should.equal(data.out);
 
-			engine.renderFile('./test/templates/hello_world.ect', data, function(err, html){
+			engine.renderFile(__dirname + '/templates/hello_world.ect', data, function(err, html){
 				if(err){ return done(err); }
 
 				html.should.equal(data.out);
@@ -150,9 +151,9 @@ describe('Mengine' , function(){
 				plan.ok(true);
 			});
 
-			engine.renderFileSync('./test/templates/hello_world.ejs', data).should.equal(data.out);
+			engine.renderFileSync(__dirname + '/templates/hello_world.ejs', data).should.equal(data.out);
 
-			engine.renderFile('./test/templates/hello_world.ejs', data, function(err, html){
+			engine.renderFile(__dirname + '/templates/hello_world.ejs', data, function(err, html){
 				if(err){ return plan.ok(true); }
 
 				html.should.equal(data.out);
@@ -175,9 +176,9 @@ describe('Mengine' , function(){
 				plan.ok(true);
 			});
 
-			engine.renderFileSync('./test/templates/hello_world.haml', data).should.equal(data.out);
+			engine.renderFileSync(__dirname + '/templates/hello_world.haml', data).should.equal(data.out);
 
-			engine.renderFile('./test/templates/hello_world.haml', data, function(err, html){
+			engine.renderFile(__dirname + '/templates/hello_world.haml', data, function(err, html){
 				if(err){ return plan.ok(true); }
 
 				html.should.equal(data.out);
@@ -200,9 +201,9 @@ describe('Mengine' , function(){
 				plan.ok(true);
 			});
 
-			engine.renderFileSync('./test/templates/hello_world.hamlcoffee', data).should.equal(data.out);
+			engine.renderFileSync(__dirname + '/templates/hello_world.hamlcoffee', data).should.equal(data.out);
 
-			engine.renderFile('./test/templates/hello_world.hamlcoffee', data, function(err, html){
+			engine.renderFile(__dirname + '/templates/hello_world.hamlcoffee', data, function(err, html){
 				if(err){ return plan.ok(true); }
 
 				html.should.equal(data.out);
@@ -225,9 +226,9 @@ describe('Mengine' , function(){
 				plan.ok(true);
 			});
 
-			engine.renderFileSync('./test/templates/hello_world.handlebars', data).should.equal(data.out+'|');
+			engine.renderFileSync(__dirname + '/templates/hello_world.handlebars', data).should.equal(data.out+'|');
 
-			engine.renderFile('./test/templates/hello_world.handlebars', data, function(err, html){
+			engine.renderFile(__dirname + '/templates/hello_world.handlebars', data, function(err, html){
 				if(err){ return plan.ok(true); }
 
 				html.should.equal(data.out+'|');
@@ -237,7 +238,7 @@ describe('Mengine' , function(){
 		});
 
 		it('hogan should output Hello world', function(done){
-			fullApiMustache('hogan', done);
+			fullApiES6('hogan', done);
 		});
 
 		it('jade should output Hello world', function(done){
@@ -254,9 +255,9 @@ describe('Mengine' , function(){
 				plan.ok(true);
 			});
 
-			engine.renderFileSync('./test/templates/hello_world.haml', data).should.equal(data.out);
+			engine.renderFileSync(__dirname + '/templates/hello_world.haml', data).should.equal(data.out);
 
-			engine.renderFile('./test/templates/hello_world.haml', data, function(err, html){
+			engine.renderFile(__dirname + '/templates/hello_world.haml', data, function(err, html){
 				if(err){ return plan.ok(true); }
 
 				html.should.equal(data.out);
@@ -277,7 +278,7 @@ describe('Mengine' , function(){
 				plan.ok(true);
 			});
 
-			engine.renderFile('./test/templates/hello_world.jazz', data, function(err, html){
+			engine.renderFile(__dirname + '/templates/hello_world.jazz', data, function(err, html){
 				if(err){ return plan.ok(true); }
 
 				html.should.equal(data.out);
@@ -298,7 +299,7 @@ describe('Mengine' , function(){
 				plan.ok(true);
 			});
 
-			engine.renderFile('./test/templates/hello_world.ejs', data, function(err, html){
+			engine.renderFile(__dirname + '/templates/hello_world.ejs', data, function(err, html){
 				if(err){ return plan.ok(true); }
 
 				html.should.equal(data.out);
@@ -321,9 +322,9 @@ describe('Mengine' , function(){
 				plan.ok(true);
 			});
 
-			engine.renderFileSync('./test/templates/hello_world.liquor', data).should.equal(data.out);
+			engine.renderFileSync(__dirname + '/templates/hello_world.liquor', data).should.equal(data.out);
 
-			engine.renderFile('./test/templates/hello_world.liquor', data, function(err, html){
+			engine.renderFile(__dirname + '/templates/hello_world.liquor', data, function(err, html){
 				if(err){ return plan.ok(true); }
 
 				html.should.equal(data.out);
@@ -337,7 +338,7 @@ describe('Mengine' , function(){
 		});
 
 		it('mustache should output Hello world', function(done){
-			fullApiMustache('mustache', done);
+			fullApiES6('mustache', done);
 		});
 
 		it('nunjucks should output Hello world', function(done){
@@ -356,7 +357,7 @@ describe('Mengine' , function(){
 				plan.ok(true);
 			});
 
-			engine.renderFile('./test/templates/hello_world.ejs', data, function(err, html){
+			engine.renderFile(__dirname + '/templates/hello_world.ejs', data, function(err, html){
 				if(err){ return plan.ok(true); }
 
 				html.should.equal(data.out);
@@ -391,9 +392,9 @@ describe('Mengine' , function(){
 				plan.ok(true);
 			});
 
-			engine.renderFileSync('./test/templates/hello_world.liquor', data).should.equal(data.out);
+			engine.renderFileSync(__dirname + '/templates/hello_world.liquor', data).should.equal(data.out);
 
-			engine.renderFile('./test/templates/hello_world.liquor', data, function(err, html){
+			engine.renderFile(__dirname + '/templates/hello_world.liquor', data, function(err, html){
 				if(err){ return plan.ok(true); }
 
 				html.should.equal(data.out);
@@ -424,9 +425,9 @@ describe('Mengine' , function(){
 				plan.ok(true);
 			});
 
-			engine.renderFileSync('./test/templates/hello_world.dust', data).should.equal(data.out);
+			engine.renderFileSync(__dirname + '/templates/hello_world.dust', data).should.equal(data.out);
 
-			engine.renderFile('./test/templates/hello_world.dust', data, function(err, html){
+			engine.renderFile(__dirname + '/templates/hello_world.dust', data, function(err, html){
 				if(err){ return plan.ok(true); }
 
 				html.should.equal(data.out);
@@ -434,6 +435,7 @@ describe('Mengine' , function(){
 				plan.ok(true);
 			});
 		});
+
 	});
 
 	describe('Partials/inheritance', function(){
@@ -441,7 +443,199 @@ describe('Mengine' , function(){
 			var data = { title: 'Hello world'};
 			var engine = mengine('atpl');
 
-			engine.renderFileSync('./test/templates/partials/atpl/index.mustache', data).should.containEql(data.title);
-		})
+			engine.renderFileSync(__dirname + '/templates/partials/atpl/index.mustache', data)
+						.should.containEql('html')
+						.and.containEql(data.title)
+						.and.containEql('Included');
+		});
+
+		it('ect should have extended layout and included include template', function(){
+			var data = { title: 'Hello world'};
+			var engine = mengine('ect');
+
+			engine.engine.configure({root: __dirname + '/templates/partials/ect'});
+
+			engine.renderFileSync('index.ect', data)
+						.should.containEql('html')
+						.and.containEql(data.title)
+						.and.containEql('Included');
+		});
+
+		it('ejs should have included head and footer template', function(){
+			var data = { title: 'Hello world', filename: __dirname + '/templates/partials/ejs/index.ejs'};
+			var engine = mengine('ejs');
+
+			engine.renderFileSync(__dirname + '/templates/partials/ejs/index.ejs', data)
+						.should.containEql('html')
+						.and.containEql(data.title)
+						.and.containEql('Footer');
+		});
+
+		it('haml-coffee should have included head and footer template', function(){
+			var data = { title: 'Hello world'};
+			var engine = mengine('haml-coffee');
+
+			engine.renderFileSync(__dirname + '/templates/partials/haml-coffee/index.hamlcoffee', data)
+						.should.containEql('html')
+						.and.containEql(data.title)
+						.and.containEql('Footer');
+		});
+		
+		it('handlebars should have included head and footer template', function(){
+			var data = { title: 'Hello world'};
+			var engine = mengine('handlebars');
+			var head = fs.readFileSync(__dirname + '/templates/partials/handlebars/head.handlebars', 'utf-8');
+			var footer = fs.readFileSync(__dirname + '/templates/partials/handlebars/footer.handlebars', 'utf-8');
+
+			engine.engine.registerPartial('head', head);
+			engine.engine.registerPartial('footer', footer);
+
+			engine.renderFileSync(__dirname + '/templates/partials/handlebars/index.handlebars', data)
+						.should.containEql('html')
+						.and.containEql(data.title)
+						.and.containEql('Footer');
+		});
+
+		it('hogan should have extended layout and included include template', function(){
+			var data = { title: 'Hello world'};
+			var engine = mengine('hogan');
+
+			data.partials = {
+				include: __dirname + '/templates/partials/hogan/include.es6', 
+				layout: __dirname + '/templates/partials/hogan/layout.es6'
+			};
+
+			engine.renderFileSync(__dirname + '/templates/partials/hogan/index.es6', data)
+						.should.containEql('html')
+						.and.containEql(data.title)
+						.and.containEql('Included');
+		});
+
+		it('jade should have extended layout and included include template', function(){
+			var data = { title: 'Hello world'};
+			var engine = mengine('jade');
+
+			engine.renderFileSync(__dirname + '/templates/partials/jade/index.haml', data)
+						.should.containEql('html')
+						.and.containEql(data.title)
+						.and.containEql('Included');
+		});
+
+		it('just should have extended layout and included include template', function(done){
+			var data = { title: 'Hello world'};
+			var engine = mengine('just');
+
+			engine.renderFile(__dirname + '/templates/partials/just/index.es6', data, function(err, html){
+				if(err){ return done(err); }
+
+				html.should.containEql('html')
+						.and.containEql(data.title)
+						.and.containEql('Included');
+
+				done();
+			});
+						
+		});
+
+		it('mustache should have included head and footer template', function(){
+			var data = { title: 'Hello world'};
+			var engine = mengine('mustache');
+
+			data.partials = {
+				head: __dirname + '/templates/partials/mustache/head.es6',
+				footer: __dirname + '/templates/partials/mustache/footer.es6'
+			};
+
+			engine.renderFileSync(__dirname + '/templates/partials/mustache/index.es6', data)
+						.should.containEql('html')
+						.and.containEql(data.title)
+						.and.containEql('Footer');
+		});
+
+		it('nunjucks should have extended layout and included include template', function(){
+			var data = { title: 'Hello world'};
+			var engine = mengine('nunjucks');
+
+			engine.renderFileSync(__dirname + '/templates/partials/nunjucks/index.mustache', data)
+					.should.containEql('html')
+						.and.containEql(data.title)
+						.and.containEql('Included');		
+		});
+
+		it('qejs should have extended layout and included include template', function(done){
+			var data = { title: 'Hello world'};
+			var engine = mengine('qejs');
+
+			engine.renderFile(__dirname + '/templates/partials/qejs/index.es6', data, function(err, html){
+				if(err){ return done(err); }
+
+				html.should.containEql('html')
+						.and.containEql(data.title)
+						.and.containEql('Included');
+
+				done();
+			});	
+		});
+
+		it('ractive should have included head and footer template', function(){
+			var data = { title: 'Hello world'};
+			var engine = mengine('ractive');
+
+			data.partials = {
+				head: __dirname + '/templates/partials/mustache/head.es6',
+				footer: __dirname + '/templates/partials/mustache/footer.es6'
+			};
+
+			engine.renderFileSync(__dirname + '/templates/partials/mustache/index.es6', data)
+						.should.containEql('html')
+						.and.containEql(data.title)
+						.and.containEql('Footer');
+		});
+
+		it('swig should have extended layout and included include template', function(){
+			var data = { title: 'Hello world'};
+			var engine = mengine('swig');
+
+			engine.renderFileSync(__dirname + '/templates/partials/swig/index.mustache', data)
+					.should.containEql('html')
+						.and.containEql(data.title)
+						.and.containEql('Included');		
+		});
+
+		it('toffee should have extended layout and included include template', function(done){
+			var data = { title: 'Hello world'};
+			var engine = mengine('toffee');
+
+			engine.renderFileSync(__dirname + '/templates/partials/toffee/index.liquor', data)
+						.should.containEql('html')
+						.and.containEql(data.title)
+						.and.containEql('Included');
+
+			engine.renderFile(__dirname + '/templates/partials/toffee/index.liquor', data, function(err, html){
+				if(err){ return done(err); }
+
+				html.should.containEql('html')
+						.and.containEql(data.title)
+						.and.containEql('Included');
+
+				done();
+			});				
+		});
+
+		it('whiskers should have included head and footer template', function(){
+			var data = { title: 'Hello world'};
+			var engine = mengine('whiskers');
+
+			data.partials = {
+				head: __dirname + '/templates/partials/whiskers/head.dust',
+				footer: __dirname + '/templates/partials/whiskers/footer.dust'
+			};
+
+			engine.renderFileSync(__dirname + '/templates/partials/whiskers/index.dust', data)
+						.should.containEql('html')
+						.and.containEql(data.title)
+						.and.containEql('Footer');
+		});
+
 	});
 });

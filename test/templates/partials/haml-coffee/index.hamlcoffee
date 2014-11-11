@@ -1,0 +1,5 @@
+!!!
+	+include 'test/templates/partials/haml-coffee/head.hamlcoffee'
+	%body
+		%h1= @title
+		+include 'test/templates/partials/haml-coffee/footer.hamlcoffee'
