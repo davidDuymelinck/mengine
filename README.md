@@ -69,7 +69,7 @@ If there is no custom configuration file mengine will search for a configuration
 - [haml-coffee](https://github.com/netzpirat/haml-coffee/)
 - [haml](https://github.com/tj/haml.js)
 - [handlebars](https://github.com/wycats/handlebars.js/)
-- [hogan](https://github.com/twitter/hogan.js)
+- [hogan](https://github.com/twitter/hogan.js)*
 - [jade](https://github.com/jadejs/jade)
 - [jazz](https://github.com/shinetech/jazz)
 - [just](https://github.com/baryshev/just)*
