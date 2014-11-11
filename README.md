@@ -17,6 +17,11 @@ Why are all the methods in one file?
 
 The answer to these questions lead me to create a new package.
 
+The things that are important for this package are:
+
+- making the switch to another language as easy as possible
+- allow the user to be able to (allmost) all the power template enigne provides
+
 ## Usage
 
     var engine = require('mengine')('ejs');
@@ -62,34 +67,36 @@ The call from a root file would be;
 
 If there is no custom configuration file mengine will search for a configuration file in the lib/config directory. The following template engines are supported:
 
-- [atpl](https://github.com/soywiz/atpl.js)
+- [atpl](https://github.com/soywiz/atpl.js)+
 - [eco](https://github.com/sstephenson/eco)
-- [ect](https://github.com/baryshev/ect)*
-- [ejs](https://github.com/tj/ejs)*
-- [haml-coffee](https://github.com/netzpirat/haml-coffee/)
+- [ect](https://github.com/baryshev/ect) * +
+- [ejs](https://github.com/tj/ejs) * -
+- [haml-coffee](https://github.com/netzpirat/haml-coffee/) -
 - [haml](https://github.com/tj/haml.js)
-- [handlebars](https://github.com/wycats/handlebars.js/)
-- [hogan](https://github.com/twitter/hogan.js)*
-- [jade](https://github.com/jadejs/jade)
+- [handlebars](https://github.com/wycats/handlebars.js/) -
+- [hogan](https://github.com/twitter/hogan.js) * +
+- [jade](https://github.com/jadejs/jade) +
 - [jazz](https://github.com/shinetech/jazz)
-- [just](https://github.com/baryshev/just)*
+- [just](https://github.com/baryshev/just) * +
 - [liquor](https://github.com/chjj/liquor)
-- [lodash](https://github.com/lodash/lodash)*
-- [mustache](https://github.com/janl/mustache.js)*
-- [nunjucks](https://github.com/mozilla/nunjucks)
-- [qejs](https://github.com/jepso/QEJS)*
-- [ractive](https://github.com/ractivejs/ractive)*
-- [swig](https://github.com/paularmstrong/swig)
+- [lodash](https://github.com/lodash/lodash) *
+- [mustache](https://github.com/janl/mustache.js) * -
+- [nunjucks](https://github.com/mozilla/nunjucks) +
+- [qejs](https://github.com/jepso/QEJS) * +
+- [ractive](https://github.com/ractivejs/ractive) * -
+- [swig](https://github.com/paularmstrong/swig) +
 - [templayed](https://github.com/archan937/templayed.js/)
-- [toffee](https://github.com/malgorithms/toffee)
-- [underscore](https://github.com/jashkenas/underscore)*
+- [toffee](https://github.com/malgorithms/toffee) +
+- [underscore](https://github.com/jashkenas/underscore) *
 - [walrus](https://github.com/jeremyruppel/walrus)
-- [whiskers](https://github.com/gsf/whiskers.js)
+- [whiskers](https://github.com/gsf/whiskers.js) -
 
 If the template language allows the change of the open and close strings, marked above with *, the package configuration will set them to ${ and } respectively.
 
+Template languages marked with + and - allow subtemplates. The ones with - only have partials. The ones with + have inheritance and partials.
+
 ## Tests
 
-Look in the test directory if you want more documentation.
+Look in the test directory for more documentation.
 
 Run the tests after installing the package with `npm test`.
