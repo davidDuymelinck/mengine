@@ -75,7 +75,7 @@ If there is no custom configuration file mengine will search for a configuration
 - [just](https://github.com/baryshev/just)*
 - [liquor](https://github.com/chjj/liquor)
 - [lodash](https://github.com/lodash/lodash)*
-- [mustache](https://github.com/janl/mustache.js)
+- [mustache](https://github.com/janl/mustache.js)*
 - [nunjucks](https://github.com/mozilla/nunjucks)
 - [qejs](https://github.com/jepso/QEJS)*
 - [ractive](https://github.com/ractivejs/ractive)*
