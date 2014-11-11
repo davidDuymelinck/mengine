@@ -66,7 +66,7 @@ If there is no custom configuration file mengine will search for a configuration
 - [eco](https://github.com/sstephenson/eco)
 - [ect](https://github.com/baryshev/ect)*
 - [ejs](https://github.com/tj/ejs)*
-- [haml-coffee](https://github.com/9elements/haml-coffee)
+- [haml-coffee](https://github.com/netzpirat/haml-coffee/)
 - [haml](https://github.com/tj/haml.js)
 - [handlebars](https://github.com/wycats/handlebars.js/)
 - [hogan](https://github.com/twitter/hogan.js)
