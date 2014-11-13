@@ -528,11 +528,11 @@ describe('Mengine' , function(){
 		it('handlebars should have included head and footer template', function(){
 			var data = { title: 'Hello world'};
 			var engine = mengine('handlebars');
-			var head = fs.readFileSync(__dirname + '/templates/partials/handlebars/head.handlebars', 'utf-8');
-			var footer = fs.readFileSync(__dirname + '/templates/partials/handlebars/footer.handlebars', 'utf-8');
 
-			engine.engine.registerPartial('head', head);
-			engine.engine.registerPartial('footer', footer);
+			data.partials = {
+				head: __dirname + '/templates/partials/handlebars/head.handlebars',
+				footer: __dirname + '/templates/partials/handlebars/footer.handlebars'
+			};
 
 			engine.renderFileSync(__dirname + '/templates/partials/handlebars/index.handlebars', data)
 						.should.containEql('html')
