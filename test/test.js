@@ -98,6 +98,29 @@ describe('Mengine' , function(){
 			});
 		});
 
+		it('dust should output Hello world', function(done){
+			var engine = mengine('dust');
+			var plan = new Plan(2, done);
+			// required for renderString
+			data.templateName = 'test';
+
+			engine.renderString('{out}', data, function(err, html){
+				if(err){ return plan.ok(true); }
+
+				html.should.equal(data.out);
+
+				plan.ok(true);
+			});
+
+			engine.renderFile(__dirname + '/templates/hello_world.dust', data, function(err, html){
+				if(err){ return plan.ok(true); }
+
+				html.should.equal(data.out);
+
+				plan.ok(true);
+			});
+		});
+
 		it('eco should output Hello world', function(done){
 			var engine = mengine('eco');
 			var plan = new Plan(2, done);
@@ -447,6 +470,27 @@ describe('Mengine' , function(){
 						.should.containEql('html')
 						.and.containEql(data.title)
 						.and.containEql('Included');
+		});
+
+		it('dust should have should have included head and footer template', function(done){
+			var data = { title: 'Hello world'};
+			var engine = mengine('dust');
+
+			data.partials = {
+				head: __dirname + '/templates/partials/dust/head.dust',
+				footer: __dirname + '/templates/partials/dust/footer.dust'
+			};
+
+			engine.renderFile(__dirname + '/templates/partials/dust/index.dust', data, function(err, html){
+				if(err){ return done(err); }
+
+				html.should.containEql('html')
+						.and.containEql(data.title)
+						.and.containEql('Included');
+
+				done();
+			});
+
 		});
 
 		it('ect should have extended layout and included include template', function(){
