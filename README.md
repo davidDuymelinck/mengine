@@ -68,7 +68,7 @@ The call from a root file would be;
 If there is no custom configuration file mengine will search for a configuration file in the lib/config directory. The following template engines are supported:
 
 - [atpl](https://github.com/soywiz/atpl.js) +
-- [dust](https://github.com/linkedin/dustjs) -
+- [dust](https://github.com/linkedin/dustjs) +
 - [eco](https://github.com/sstephenson/eco)
 - [ect](https://github.com/baryshev/ect) * +
 - [ejs](https://github.com/tj/ejs) * -

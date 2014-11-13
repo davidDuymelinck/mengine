@@ -472,13 +472,13 @@ describe('Mengine' , function(){
 						.and.containEql('Included');
 		});
 
-		it('dust should have should have included head and footer template', function(done){
+		it('dust should have extended layout and included include template', function(done){
 			var data = { title: 'Hello world'};
 			var engine = mengine('dust');
 
 			data.partials = {
-				head: __dirname + '/templates/partials/dust/head.dust',
-				footer: __dirname + '/templates/partials/dust/footer.dust'
+				layout: __dirname + '/templates/partials/dust/layout.dust',
+				include: __dirname + '/templates/partials/dust/include.dust'
 			};
 
 			engine.renderFile(__dirname + '/templates/partials/dust/index.dust', data, function(err, html){

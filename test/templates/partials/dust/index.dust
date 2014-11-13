@@ -1,3 +1,6 @@
-{>"head"/}
+{>"layout"/}
+
+{<content}
 <h1>{title}</h1>
-{>"footer"/}
+{>"include"/}
+{/content}
