@@ -480,7 +480,7 @@ describe('Mengine' , function(){
 						.and.containEql(data.title)
 						.and.containEql('Footer');
 		});
-		
+
 		it('handlebars should have included head and footer template', function(){
 			var data = { title: 'Hello world'};
 			var engine = mengine('handlebars');
@@ -501,7 +501,7 @@ describe('Mengine' , function(){
 			var engine = mengine('hogan');
 
 			data.partials = {
-				include: __dirname + '/templates/partials/hogan/include.es6', 
+				include: __dirname + '/templates/partials/hogan/include.es6',
 				layout: __dirname + '/templates/partials/hogan/layout.es6'
 			};
 
@@ -534,7 +534,7 @@ describe('Mengine' , function(){
 
 				done();
 			});
-						
+
 		});
 
 		it('mustache should have included head and footer template', function(){
@@ -559,7 +559,7 @@ describe('Mengine' , function(){
 			engine.renderFileSync(__dirname + '/templates/partials/nunjucks/index.mustache', data)
 					.should.containEql('html')
 						.and.containEql(data.title)
-						.and.containEql('Included');		
+						.and.containEql('Included');
 		});
 
 		it('qejs should have extended layout and included include template', function(done){
@@ -574,7 +574,7 @@ describe('Mengine' , function(){
 						.and.containEql('Included');
 
 				done();
-			});	
+			});
 		});
 
 		it('ractive should have included head and footer template', function(){
@@ -599,7 +599,7 @@ describe('Mengine' , function(){
 			engine.renderFileSync(__dirname + '/templates/partials/swig/index.mustache', data)
 					.should.containEql('html')
 						.and.containEql(data.title)
-						.and.containEql('Included');		
+						.and.containEql('Included');
 		});
 
 		it('toffee should have extended layout and included include template', function(done){
@@ -619,7 +619,7 @@ describe('Mengine' , function(){
 						.and.containEql('Included');
 
 				done();
-			});				
+			});
 		});
 
 		it('whiskers should have included head and footer template', function(){
