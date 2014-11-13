@@ -206,28 +206,7 @@ describe('Lib template configs', function(){
 	});
 
 	it('handlebars should output Hello world', function(done){
-		var engine = mengine('handlebars');
-		var plan = new Plan(2, done);
-		// Needed to add character because the engine didn't allow a variable only string
-		engine.renderStringSync('{{ out }} ', data).should.equal(data.out+' ');
-
-		engine.renderString('{{ out }} ', data, function(err, html){
-			if(err){ return plan.ok(true); }
-
-			html.should.equal(data.out+' ');
-
-			plan.ok(true);
-		});
-
-		engine.renderFileSync(__dirname + '/templates/hello_world.handlebars', data).should.equal(data.out+'|');
-
-		engine.renderFile(__dirname + '/templates/hello_world.handlebars', data, function(err, html){
-			if(err){ return plan.ok(true); }
-
-			html.should.equal(data.out+'|');
-
-			plan.ok(true);
-		});
+		fullApiMustache('handlebars', done);
 	});
 
 	it('hogan should output Hello world', function(done){
