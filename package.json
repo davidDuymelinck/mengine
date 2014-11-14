@@ -22,7 +22,6 @@
   },
   "homepage": "https://github.com/davidDuymelinck/mengine",
   "devDependencies": {
-    "assert": "^1.1.2",
     "atpl": "^0.7.8",
     "eco": "^1.1.0-rc-3",
     "ect": "^0.5.9",
