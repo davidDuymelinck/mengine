@@ -1,7 +1,9 @@
 var should = require('should');
 var mengine = require('../');
-var Plan = require('../lib/util').Plan;
-
+var util = require('../lib/util');
+var Plan = util.Plan;
+var MyConsole = util.MyConsole;
+console.log(MyConsole);
 var noStringsES6 = function(engine, plan){
 	(function(){
 		engine.renderStringSync('${#missingTag}', {});
@@ -348,7 +350,8 @@ describe('Errors', function(){
 	it('toffee', function(done){
 		var engine = mengine('toffee');
 		var plan = new Plan(2, done);
-		//TODO: find a way to catch the error output of renderStringSync
+
+		// the template engine uses console.log for errors so no string methods error tests
 
 		engine.renderString('#{)', {}, function(err, html){
 			err.should.be.an.Error;
@@ -380,6 +383,8 @@ describe('Errors', function(){
 	it('whiskers', function(done){
 		var engine = mengine('whiskers');
 		var plan = new Plan(1, done);
+
+		// the template engine uses console.warn for errors so no string methods error tests
 
 		noFiles(engine, plan);
 	});
